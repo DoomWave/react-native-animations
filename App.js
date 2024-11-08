@@ -1,11 +1,17 @@
-import { View } from "react-native";
+import { LogBox, View } from "react-native";
 import { s } from "./App.style";
-import Animated,{ useAnimatedStyle,useSharedValue, withTiming } from "react-native-reanimated"
+import Animated,{ 
+  useAnimatedStyle,
+  useSharedValue, 
+  withTiming 
+} from "react-native-reanimated"
 import { useEffect } from "react";
 export default function App() {
+  LogBox.ignoreLogs(["No native splash"]);
+
   // 1 - Declare an animation value
   const squareAnimX = useSharedValue(0);
-
+  
   // 2 - Run animation and update the animation value
   useEffect(()=>{
     squareAnimX.value = withTiming(300, {duration: 2000})
