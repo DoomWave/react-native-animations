@@ -4,7 +4,8 @@ import Animated,{
   useAnimatedStyle,
   useSharedValue, 
   withSpring, 
-  withTiming 
+  withTiming,
+  withRepeat 
 } from "react-native-reanimated"
 import { useEffect } from "react";
 export default function App() {
@@ -17,7 +18,7 @@ export default function App() {
 
   // 2 - Run animation and update the animation value
   useEffect(()=>{
-    squareAnimX.value = withSpring(300, {mass:10});
+    squareAnimX.value = withRepeat(withSpring(300), 3);
   }, [])
 
   // 3 - Create an animated style and send it the animation value
