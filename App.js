@@ -1,19 +1,25 @@
 import { View } from "react-native";
 import { s } from "./App.style";
-import { useEffect, useState } from "react";
-
+import Animated,{ useAnimatedStyle,useSharedValue, withTiming } from "react-native-reanimated"
+import { useEffect } from "react";
 export default function App() {
-  const [x, setX] = useState(0);
+  // 1 - Declare an animation value
+  const squareAnimX = useSharedValue(0);
 
-  useEffect(() => {
-    setInterval(() => {
-      setX((x) => x + 1);
-    }, 25);
-  }, []);
+  // 2 - Run animation and update the animation value
+  useEffect(()=>{
+    squareAnimX.value = withTiming(300, {duration: 2000})
+  }, [])
 
+  // 3 - Create an animated style and send it the animation value
+  const squareAnimStyle = useAnimatedStyle(()=>{
+    return{
+      left : squareAnimX.value, 
+    };
+  })
   return (
     <View style={s.root}>
-      <View style={[s.square, { left: x }]} />
+      <Animated.View style={[s.square, squareAnimStyle]} />
     </View>
   );
 }
