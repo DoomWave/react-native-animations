@@ -11,18 +11,32 @@ export default function App() {
 
   // 1 - Declare an animation value
   const squareAnimX = useSharedValue(0);
-  
+  const squareAnimOpacity = useSharedValue(1);
+  const squareAnimY = useSharedValue(0)
+
   // 2 - Run animation and update the animation value
   useEffect(()=>{
-    squareAnimX.value = withTiming(300, {duration: 2000})
+    squareAnimX.value = withTiming(300, {duration: 2000}, ()=>{
+      squareAnimY.value = withTiming(400, {duration: 4000})
+      squareAnimOpacity.value = withTiming(1, {duration: 4000})
+    })
+    squareAnimOpacity.value = withTiming(0, {duration: 2000})
   }, [])
 
   // 3 - Create an animated style and send it the animation value
   const squareAnimStyle = useAnimatedStyle(()=>{
     return{
-      left : squareAnimX.value, 
+      transform: [
+        {
+        translateX : squareAnimX.value,
+      }, {
+        translateY : squareAnimY.value,
+      },
+    ],
+      opacity : squareAnimOpacity.value
     };
-  })
+  });
+  // 4 - send the animated style to an animated component
   return (
     <View style={s.root}>
       <Animated.View style={[s.square, squareAnimStyle]} />
