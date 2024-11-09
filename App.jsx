@@ -26,14 +26,12 @@ export default function App() {
       squareAnimTranslateX.value = ctx.initialPosX + e.translationX;
       squareAnimTranslateY.value = ctx.initialPosY + e.translationY;
     },
-    onEnd: (e, ctx) => {
+    onEnd: () => {
       console.log("onEnd");
-      const distanceFromCenter = Math.sqrt(
-        squareAnimTranslateX.value ** 2 + squareAnimTranslateY.value ** 2
-      );
-      if (distanceFromCenter < CIRCLE_RADIUS) {
-        squareAnimTranslateX.value = withSpring(0);
-        squareAnimTranslateY.value = withSpring(0);
+      const distanceFromCenter = Math.sqrt(squareAnimTranslateX.value**2+squareAnimTranslateY.value ** 2)
+      if(distanceFromCenter< CIRCLE_RADIUS){
+      squareAnimTranslateX.value = withSpring(0)
+      squareAnimTranslateY.value = withSpring(0)
       }
     },
   });
