@@ -5,6 +5,7 @@ import Animated, {
   interpolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
+import { View, Text } from "react-native";
 export function ListItem({ image, scrollY, index }) {
   const imgAnimStyle = useAnimatedStyle(() => {
     const height = interpolate(
@@ -21,6 +22,10 @@ export function ListItem({ image, scrollY, index }) {
   return (
     <TouchableOpacity onPress={()=>alert("You clicked!")}>
     <Animated.Image source={image.picture} style={[s.image, imgAnimStyle]} />
+    <View style={s.textContainer}>
+      <Text style={s.title}>{image.subtitle}</Text>
+      <Text style={s.subtitle}>{image.subtitle}</Text>
+    </View>
     </TouchableOpacity>
   );
 }
