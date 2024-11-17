@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { IMAGE_SIZE, s } from "./ListItem.style";
 import Animated, {
     Extrapolate,
@@ -18,6 +19,8 @@ export function ListItem({ image, scrollY, index }) {
     };
   });
   return (
+    <TouchableOpacity onPress={()=>alert("You clicked!")}>
     <Animated.Image source={image.picture} style={[s.image, imgAnimStyle]} />
+    </TouchableOpacity>
   );
 }
